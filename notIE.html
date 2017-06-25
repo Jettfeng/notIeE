@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    // 处理IE不支持getElementsByClassName的情况
+    if (!document.getElementsByClassName) {
+        document.getElementsByClassName = function (cls) {
+            var ret = [];
+            // 获取所有标签
+            var els = document.getElementsByTagName('*');
+            for (var i = 0, len = els.length; i < len; i++) {
+                // 该标签可能有多个类名
+                if (els[i].className === cls
+                    || els[i].className.indexOf(cls + ' ') >= 0
+                    || els[i].className.indexOf(' ' + cls + ' ') >= 0
+                    || els[i].className.indexOf(' ' + cls) >= 0) {
+                    ret.push(els[i]);
+                }
+            }
+            return ret;
+        }
+    }
+</script>
+</html>
